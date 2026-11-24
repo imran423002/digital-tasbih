@@ -1,14 +1,14 @@
-
 <!doctype html>
 <html lang="bn">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta id="theme-color-meta" name="theme-color" content="#000000">
-<meta name="description" content="Digital Tasbih counter with themes and custom targets">
+<meta name="description" content="Digital Tasbih counter with themes, languages and custom targets">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
 <title>Digital Tasbih</title>
+
 <style>
 :root{
   --bg:#f4f0eb;--bg2:#fffaf3;--text:#142744;--muted:#647084;
@@ -118,114 +118,392 @@ main{width:min(100%,430px);text-align:center;position:relative}
 .theme-option .check{margin-left:auto;font-size:22px;opacity:0}
 .theme-option.selected .check{opacity:1}
 .theme-option.selected{font-weight:600}
-@media(max-width:360px){.ring-wrap{width:220px;height:220px}.summary{font-size:13px;gap:9px}.target{font-size:13px}}
+.section-label{font-size:18px;font-weight:500;margin:25px 0 12px;text-align:left}
+@media(max-width:360px){
+ .ring-wrap{width:220px;height:220px}
+ .summary{font-size:13px;gap:9px}
+ .target{font-size:13px}
+}
 </style>
 </head>
+
 <body data-theme="Night">
 <main>
+
 <section id="homePage" class="page active">
+
  <div class="top">
   <button class="icon-btn" id="statsBtn" aria-label="Statistics">
    <svg viewBox="0 0 24 24"><path d="M4 19V10M10 19V5M16 19v-7M22 19V3"/></svg>
   </button>
+
   <div class="dome" aria-hidden="true">
    <svg viewBox="0 0 60 50"><path d="M7 43c2-13 10-21 23-27 13 6 21 14 23 27M7 43h46M16 42c1-9 6-16 14-21 8 5 13 12 14 21M30 16V5m-3 4c2 2 4 2 6 0"/></svg>
   </div>
+
   <button class="icon-btn" id="settingsBtn" aria-label="Settings">
    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.6 2.8-.2-.1a1.7 1.7 0 0 0-1.8.1 1.7 1.7 0 0 0-.8 1.5v.2h-3.2v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8-.1l-.2.1-1.6-2.8.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-.9H6.3v-3.2h.2A1.7 1.7 0 0 0 8 10a1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.6-2.8.2.1a1.7 1.7 0 0 0 1.8-.1 1.7 1.7 0 0 0 .8-1.5v-.2h3.2v.2a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8.1l.2-.1 1.6 2.8-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5.9h.2v3.2h-.2a1.7 1.7 0 0 0-1.5.9z"/></svg>
   </button>
  </div>
+
  <div class="count" id="count">০</div>
+
  <div class="ring-wrap">
   <svg class="ring-svg" viewBox="0 0 220 220" aria-hidden="true">
    <circle class="ring-track" cx="110" cy="110" r="100"/>
    <circle class="ring-progress" id="ringProgress" cx="110" cy="110" r="100"/>
   </svg>
+
   <button class="tap" id="tap" aria-label="Count">
-   <svg class="beads" viewBox="0 0 40 48" aria-hidden="true"><g fill="currentColor"><circle cx="20" cy="7" r="3.5"/><circle cx="29" cy="10" r="3.5"/><circle cx="34" cy="19" r="3.5"/><circle cx="32" cy="29" r="3.5"/><circle cx="25" cy="36" r="3.5"/><circle cx="15" cy="36" r="3.5"/><circle cx="8" cy="29" r="3.5"/><circle cx="6" cy="19" r="3.5"/><circle cx="11" cy="10" r="3.5"/><path d="M20 39v5l-3 2 3 2 3-2-3-2" /></g></svg>
-   <span class="tap-label">TAP</span><span class="tap-sub">+১</span>
+   <svg class="beads" viewBox="0 0 40 48" aria-hidden="true">
+    <g fill="currentColor">
+     <circle cx="20" cy="7" r="3.5"/>
+     <circle cx="29" cy="10" r="3.5"/>
+     <circle cx="34" cy="19" r="3.5"/>
+     <circle cx="32" cy="29" r="3.5"/>
+     <circle cx="25" cy="36" r="3.5"/>
+     <circle cx="15" cy="36" r="3.5"/>
+     <circle cx="8" cy="29" r="3.5"/>
+     <circle cx="6" cy="19" r="3.5"/>
+     <circle cx="11" cy="10" r="3.5"/>
+     <path d="M20 39v5l-3 2 3 2 3-2-3-2"/>
+    </g>
+   </svg>
+   <span class="tap-label">TAP</span>
+   <span class="tap-sub" id="tapSub">+১</span>
   </button>
  </div>
- <div class="summary"><span>টার্গেট: <b id="goalText">৩৩</b></span><span class="sep"></span><span>বাকি: <b id="remaining">৩৩</b></span></div>
+
+ <div class="summary">
+  <span><span id="targetLabel">টার্গেট:</span> <b id="goalText">৩৩</b></span>
+  <span class="sep"></span>
+  <span><span id="remainingLabel">বাকি:</span> <b id="remaining">৩৩</b></span>
+ </div>
+
  <div class="targets">
   <button class="target active" data-goal="33">৩৩</button>
   <button class="target" data-goal="99">৯৯</button>
   <button class="target" data-goal="100">১০০</button>
   <button class="target" data-goal="1000">১,০০০</button>
  </div>
+
  <button class="custom-open" id="customToggle">＋ কাস্টম টার্গেট</button>
+
  <div class="custom-row" id="customRow">
   <input id="customInput" type="number" min="1" max="10000000" inputmode="numeric" placeholder="নিজের টার্গেট লিখুন">
   <button id="customApply">Apply</button>
  </div>
+
  <div class="actions">
   <button class="action" id="undo">↶ Undo</button>
   <button class="action" id="minus">− ১</button>
   <button class="action" id="reset">↻ Reset</button>
  </div>
- <div class="hint">কাউন্টার স্বয়ংক্রিয়ভাবে সংরক্ষিত হবে</div>
+
+ <div class="hint" id="hint">কাউন্টার স্বয়ংক্রিয়ভাবে সংরক্ষিত হবে</div>
 </section>
+
 <section id="settingsPage" class="page">
+
  <div class="settings-head">
-  <button class="icon-btn" id="backBtn" aria-label="Back"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
-  <h2>Theme</h2>
+  <button class="icon-btn" id="backBtn" aria-label="Back">
+   <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+  </button>
+  <h2 id="settingsTitle">Theme</h2>
  </div>
+
+ <h3 class="section-label" id="themeHeading">Theme</h3>
+
  <div class="theme-list" id="themeList">
-  <button class="theme-option" data-theme-choice="Night"><span class="swatch" style="background:#000"></span><span>Night</span><span class="check">✓</span></button>
-  <button class="theme-option" data-theme-choice="Ember"><span class="swatch" style="background:#160d08"></span><span>Ember</span><span class="check">✓</span></button>
-  <button class="theme-option" data-theme-choice="Slate"><span class="swatch" style="background:#101722"></span><span>Slate</span><span class="check">✓</span></button>
-  <button class="theme-option" data-theme-choice="Moss"><span class="swatch" style="background:#0c130b"></span><span>Moss</span><span class="check">✓</span></button>
-  <button class="theme-option" data-theme-choice="Ocean"><span class="swatch" style="background:#06131d"></span><span>Ocean</span><span class="check">✓</span></button>
+  <button class="theme-option" data-theme-choice="Night">
+   <span class="swatch" style="background:#000"></span>
+   <span>Night</span><span class="check">✓</span>
+  </button>
+  <button class="theme-option" data-theme-choice="Ember">
+   <span class="swatch" style="background:#160d08"></span>
+   <span>Ember</span><span class="check">✓</span>
+  </button>
+  <button class="theme-option" data-theme-choice="Slate">
+   <span class="swatch" style="background:#101722"></span>
+   <span>Slate</span><span class="check">✓</span>
+  </button>
+  <button class="theme-option" data-theme-choice="Moss">
+   <span class="swatch" style="background:#0c130b"></span>
+   <span>Moss</span><span class="check">✓</span>
+  </button>
+  <button class="theme-option" data-theme-choice="Ocean">
+   <span class="swatch" style="background:#06131d"></span>
+   <span>Ocean</span><span class="check">✓</span>
+  </button>
  </div>
+
+ <h3 class="section-label" id="languageHeading">Language</h3>
+
+ <div class="theme-list" id="languageList">
+  <button class="theme-option" data-language-choice="bn">
+   <span>🇧🇩</span>
+   <span>বাংলা</span>
+   <span class="check">✓</span>
+  </button>
+  <button class="theme-option" data-language-choice="en">
+   <span>🇬🇧</span>
+   <span>English</span>
+   <span class="check">✓</span>
+  </button>
+ </div>
+
 </section>
 </main>
+
 <script>
 const $=id=>document.getElementById(id);
-const safeNumber=(value,fallback)=>{const n=Number(value);return Number.isFinite(n)&&n>=0?n:fallback};
+
+const safeNumber=(value,fallback)=>{
+ const n=Number(value);
+ return Number.isFinite(n)&&n>=0?n:fallback;
+};
+
 let count=safeNumber(localStorage.getItem('tasbih-count'),0);
 let goal=safeNumber(localStorage.getItem('tasbih-goal'),33)||33;
 let theme=localStorage.getItem('tasbih-theme')||'Night';
+let language=localStorage.getItem('tasbih-language')||'bn';
 let history=[];
+
 const circumference=2*Math.PI*100;
 const themes=['Night','Ember','Slate','Moss','Ocean'];
-function bn(n){return Math.floor(n).toLocaleString('bn-BD')}
-function save(){localStorage.setItem('tasbih-count',String(count));localStorage.setItem('tasbih-goal',String(goal));localStorage.setItem('tasbih-theme',theme)}
+
+const translations={
+ bn:{
+  target:'টার্গেট:',
+  remaining:'বাকি:',
+  custom:'＋ কাস্টম টার্গেট',
+  placeholder:'নিজের টার্গেট লিখুন',
+  apply:'প্রয়োগ করুন',
+  undo:'↶ Undo',
+  minus:'− ১',
+  reset:'↻ Reset',
+  hint:'কাউন্টার স্বয়ংক্রিয়ভাবে সংরক্ষিত হবে',
+  confirm:'গণনা শূন্য করবেন?',
+  invalid:'১ থেকে ১,০০,০০,০০০-এর মধ্যে একটি সঠিক সংখ্যা লিখুন।',
+  tap:'+১',
+  theme:'থিম',
+  language:'ভাষা',
+  back:'ফিরে যান'
+ },
+ en:{
+  target:'Target:',
+  remaining:'Remaining:',
+  custom:'＋ Custom Target',
+  placeholder:'Enter your target',
+  apply:'Apply',
+  undo:'↶ Undo',
+  minus:'− 1',
+  reset:'↻ Reset',
+  hint:'Counter is saved automatically',
+  confirm:'Reset the count to zero?',
+  invalid:'Enter a valid number between 1 and 10,000,000.',
+  tap:'+1',
+  theme:'Theme',
+  language:'Language',
+  back:'Back'
+ }
+};
+
+function formatNumber(n){
+ return Math.floor(n).toLocaleString(
+  language==='bn'?'bn-BD':'en-US'
+ );
+}
+
+function save(){
+ localStorage.setItem('tasbih-count',String(count));
+ localStorage.setItem('tasbih-goal',String(goal));
+ localStorage.setItem('tasbih-theme',theme);
+ localStorage.setItem('tasbih-language',language);
+}
+
 function render(){
- $('count').textContent=bn(count);
- $('goalText').textContent=bn(goal);
- $('remaining').textContent=bn(Math.max(0,goal-count));
+ const t=translations[language];
+
+ $('count').textContent=formatNumber(count);
+ $('goalText').textContent=formatNumber(goal);
+ $('remaining').textContent=formatNumber(Math.max(0,goal-count));
+
  const progress=Math.min(1,count/goal);
+
  $('ringProgress').style.strokeDasharray=String(circumference);
- $('ringProgress').style.strokeDashoffset=String(circumference*(1-progress));
- document.querySelectorAll('.target').forEach(b=>b.classList.toggle('active',Number(b.dataset.goal)===goal));
- document.querySelectorAll('.theme-option').forEach(b=>b.classList.toggle('selected',b.dataset.themeChoice===theme));
+ $('ringProgress').style.strokeDashoffset=
+  String(circumference*(1-progress));
+
+ document.querySelectorAll('.target').forEach(b=>{
+  b.textContent=formatNumber(Number(b.dataset.goal));
+  b.classList.toggle(
+   'active',
+   Number(b.dataset.goal)===goal
+  );
+ });
+
+ document.querySelectorAll('.theme-option[data-theme-choice]').forEach(b=>{
+  b.classList.toggle(
+   'selected',
+   b.dataset.themeChoice===theme
+  );
+ });
+
+ document.querySelectorAll('.theme-option[data-language-choice]').forEach(b=>{
+  b.classList.toggle(
+   'selected',
+   b.dataset.languageChoice===language
+  );
+ });
+
  save();
 }
+
 function applyTheme(value){
  theme=themes.includes(value)?value:'Night';
+
  document.body.dataset.theme=theme;
- $('theme-color-meta')?.setAttribute('content',theme==='Night'?'#000000':'#101722');
+
+ $('theme-color-meta').setAttribute(
+  'content',
+  theme==='Night'?'#000000':'#101722'
+ );
+
  render();
 }
-function vibrate(){if(navigator.vibrate)navigator.vibrate(22)}
-$('tap').addEventListener('click',()=>{history.push(count);count++;render();vibrate()});
-$('undo').addEventListener('click',()=>{if(history.length)count=history.pop();else count=Math.max(0,count-1);render()});
-$('minus').addEventListener('click',()=>{count=Math.max(0,count-1);render()});
-$('reset').addEventListener('click',()=>{if(confirm('গণনা শূন্য করবেন?')){history=[];count=0;render()}});
-document.querySelectorAll('.target').forEach(b=>b.addEventListener('click',()=>{goal=Number(b.dataset.goal);render()}));
-$('customToggle').addEventListener('click',()=>{$('customRow').classList.toggle('show');$('customInput').focus()});
+
+function updateLanguage(){
+ language=language==='en'?'en':'bn';
+
+ const t=translations[language];
+
+ document.documentElement.lang=language;
+
+ $('targetLabel').textContent=t.target;
+ $('remainingLabel').textContent=t.remaining;
+ $('customToggle').textContent=t.custom;
+ $('customInput').placeholder=t.placeholder;
+ $('customApply').textContent=t.apply;
+ $('undo').textContent=t.undo;
+ $('minus').textContent=t.minus;
+ $('reset').textContent=t.reset;
+ $('hint').textContent=t.hint;
+ $('tapSub').textContent=t.tap;
+ $('settingsTitle').textContent=t.theme;
+ $('themeHeading').textContent=t.theme;
+ $('languageHeading').textContent=t.language;
+ $('backBtn').setAttribute('aria-label',t.back);
+
+ render();
+}
+
+function vibrate(){
+ if(navigator.vibrate)navigator.vibrate(22);
+}
+
+/* TAP */
+$('tap').addEventListener('click',()=>{
+ history.push(count);
+ count++;
+ render();
+ vibrate();
+});
+
+/* UNDO */
+$('undo').addEventListener('click',()=>{
+ if(history.length){
+  count=history.pop();
+ }else{
+  count=Math.max(0,count-1);
+ }
+ render();
+});
+
+/* MINUS */
+$('minus').addEventListener('click',()=>{
+ count=Math.max(0,count-1);
+ render();
+});
+
+/* RESET */
+$('reset').addEventListener('click',()=>{
+ if(confirm(translations[language].confirm)){
+  history=[];
+  count=0;
+  render();
+ }
+});
+
+/* PRESET TARGETS */
+document.querySelectorAll('.target').forEach(b=>{
+ b.addEventListener('click',()=>{
+  goal=Number(b.dataset.goal);
+  render();
+ });
+});
+
+/* CUSTOM TARGET */
+$('customToggle').addEventListener('click',()=>{
+ $('customRow').classList.toggle('show');
+ $('customInput').focus();
+});
+
 $('customApply').addEventListener('click',()=>{
  const n=Number($('customInput').value);
- if(!Number.isSafeInteger(n)||n<1||n>10000000){alert('১ থেকে ১,০০,০০,০০০-এর মধ্যে একটি সঠিক সংখ্যা লিখুন।');return}
- goal=n;document.querySelectorAll('.target').forEach(b=>b.classList.remove('active'));render();$('customRow').classList.remove('show');
+
+ if(!Number.isSafeInteger(n)||n<1||n>10000000){
+  alert(translations[language].invalid);
+  return;
+ }
+
+ goal=n;
+ render();
+ $('customRow').classList.remove('show');
 });
-$('customInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('customApply').click()});
-$('settingsBtn').addEventListener('click',()=>{$('homePage').classList.remove('active');$('settingsPage').classList.add('active')});
-$('backBtn').addEventListener('click',()=>{$('settingsPage').classList.remove('active');$('homePage').classList.add('active')});
-document.querySelectorAll('.theme-option').forEach(b=>b.addEventListener('click',()=>applyTheme(b.dataset.themeChoice)));
+
+$('customInput').addEventListener('keydown',e=>{
+ if(e.key==='Enter'){
+  $('customApply').click();
+ }
+});
+
+/* SETTINGS PAGE */
+$('settingsBtn').addEventListener('click',()=>{
+ $('homePage').classList.remove('active');
+ $('settingsPage').classList.add('active');
+});
+
+$('backBtn').addEventListener('click',()=>{
+ $('settingsPage').classList.remove('active');
+ $('homePage').classList.add('active');
+});
+
+/* THEME SELECTION */
+document.querySelectorAll('[data-theme-choice]').forEach(b=>{
+ b.addEventListener('click',()=>{
+  applyTheme(b.dataset.themeChoice);
+ });
+});
+
+/* LANGUAGE SELECTION */
+document.querySelectorAll('[data-language-choice]').forEach(b=>{
+ b.addEventListener('click',()=>{
+  language=b.dataset.languageChoice;
+  updateLanguage();
+ });
+});
+
+/* LOAD SAVED SETTINGS */
 applyTheme(theme);
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
-render();
+updateLanguage();
+
+/* SERVICE WORKER */
+if('serviceWorker' in navigator){
+ window.addEventListener('load',()=>{
+  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+ });
+}
 </script>
 </body>
 </html>
