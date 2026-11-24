@@ -70,58 +70,37 @@ main{width:min(100%,430px);text-align:center;position:relative}
  <div class="ring-wrap">
   <svg class="ring-svg" viewBox="0 0 220 220" aria-hidden="true"><circle class="ring-track" cx="110" cy="110" r="100"/><circle class="ring-progress" id="ringProgress" cx="110" cy="110" r="100"/></svg>
   <button class="tap" id="tap" aria-label="Count">
-   <svg class="beads" viewBox="0 0 40 48" aria-hidden="true"><g fill="currentColor"><circle cx="20" cy="7" r="3.5"/><circle cx="29" cy="10" r="3.5"/><circle cx="34" cy="19" r="3.5"/><circle cx="32" cy="29" r="3.5"/><circle cx="25" cy="36" r="3.5"/><circle cx="15" cy="36" r="3.5"/><circle cx="8" cy="29" r="3.5"/><circle cx="6" cy="19" r="3.5"/><circle cx="11" cy="10" r="3.5"/></g><path d="M20 40v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-   <span class="tap-label">تَسْبِيح</span>
-   <span class="tap-sub" id="tapSub">+১</span>
+   <svg class="beads" viewBox="0 0 40 48" aria-hidden="true"><g fill="currentColor"><circle cx="20" cy="7" r="3.5"/><circle cx="29" cy="10" r="3.5"/><circle cx="34" cy="19" r="3.5"/><circle cx="32" cy="29" r="3.5"/><circle cx="25" cy="36" r="3.5"/><circle cx="15" cy="36" r="3.5"/><circle cx="8" cy="29" r="3.5"/><circle cx="6" cy="19" r="3.5"/><circle cx="11" cy="10" r="3.5"/><path d="M20 39v5l-3 2 3 2 3-2-3-2"/></g></svg>
+   <span class="tap-label">TAP</span><span class="tap-sub" id="tapSub">+১</span>
   </button>
  </div>
- <div class="summary">
-  <span><span id="targetLabel">টার্গেট:</span> <b id="goalText">৩৩</b></span>
-  <span class="sep"></span>
-  <span><span id="remainingLabel">বাকি:</span> <b id="remaining">৩৩</b></span>
- </div>
+ <div class="summary"><span><span id="targetLabel">টার্গেট:</span> <b id="goalText">৩৩</b></span><span class="sep"></span><span><span id="remainingLabel">বাকি:</span> <b id="remaining">৩৩</b></span></div>
  <div class="targets">
-  <button class="target" data-goal="33">৩৩</button>
-  <button class="target" data-goal="99">৯৯</button>
-  <button class="target" data-goal="100">১০০</button>
-  <button class="target" data-goal="1000">১০০০</button>
+  <button class="target" data-goal="33">৩৩</button><button class="target" data-goal="99">৯৯</button><button class="target" data-goal="100">১০০</button><button class="target" data-goal="1000">১,০০০</button>
  </div>
  <button class="custom-open" id="customToggle">＋ কাস্টম টার্গেট</button>
- <div class="custom-row" id="customRow">
-  <input id="customInput" type="number" min="1" max="10000000" placeholder="নিজের টার্গেট লিখুন">
-  <button id="customApply">প্রয়োগ</button>
- </div>
- <div class="actions">
-  <button class="action" id="undo">↶ Undo</button>
-  <button class="action" id="minus">− ১</button>
-  <button class="action" id="reset">↻ Reset</button>
- </div>
+ <div class="custom-row" id="customRow"><input id="customInput" type="number" min="1" max="10000000" inputmode="numeric" placeholder="নিজের টার্গেট লিখুন"><button id="customApply">Apply</button></div>
+ <div class="actions"><button class="action" id="undo">↶ Undo</button><button class="action" id="minus">− ১</button><button class="action" id="reset">↻ Reset</button></div>
  <div class="hint" id="hint">কাউন্টার স্বয়ংক্রিয়ভাবে সংরক্ষিত হবে</div>
 </section>
 <section id="settingsPage" class="page">
- <div class="settings-head">
-  <button class="icon-btn" id="settingsBack" aria-label="Back">←</button>
-  <h2 id="settingsTitle">সেটিংস</h2>
- </div>
- <h3 class="section-label" id="themeHeading">থিম</h3>
+ <div class="settings-head"><button class="icon-btn" id="settingsBack" aria-label="Back"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><h2 id="settingsTitle">Settings</h2></div>
+ <h3 class="section-label" id="themeHeading">Theme</h3>
  <div class="theme-list">
-  <button class="theme-option" data-theme-choice="Night"><span class="swatch" style="background:#080808"></span>Night <span class="check">✓</span></button>
-  <button class="theme-option" data-theme-choice="Ember"><span class="swatch" style="background:#9a4e20"></span>Ember <span class="check">✓</span></button>
-  <button class="theme-option" data-theme-choice="Slate"><span class="swatch" style="background:#536a86"></span>Slate <span class="check">✓</span></button>
-  <button class="theme-option" data-theme-choice="Moss"><span class="swatch" style="background:#647c43"></span>Moss <span class="check">✓</span></button>
-  <button class="theme-option" data-theme-choice="Ocean"><span class="swatch" style="background:#1682a4"></span>Ocean <span class="check">✓</span></button>
+  <button class="theme-option" data-theme-choice="Night"><span class="swatch" style="background:#000"></span><span>Night</span><span class="check">✓</span></button>
+  <button class="theme-option" data-theme-choice="Ember"><span class="swatch" style="background:#160d08"></span><span>Ember</span><span class="check">✓</span></button>
+  <button class="theme-option" data-theme-choice="Slate"><span class="swatch" style="background:#101722"></span><span>Slate</span><span class="check">✓</span></button>
+  <button class="theme-option" data-theme-choice="Moss"><span class="swatch" style="background:#0c130b"></span><span>Moss</span><span class="check">✓</span></button>
+  <button class="theme-option" data-theme-choice="Ocean"><span class="swatch" style="background:#06131d"></span><span>Ocean</span><span class="check">✓</span></button>
  </div>
- <h3 class="section-label" id="languageHeading">ভাষা</h3>
+ <h3 class="section-label" id="languageHeading">Language</h3>
  <div class="theme-list">
-  <button class="theme-option" data-language-choice="bn">বাংলা <span class="check">✓</span></button>
-  <button class="theme-option" data-language-choice="en">English <span class="check">✓</span></button>
+  <button class="theme-option" data-language-choice="bn"><span>🇧🇩</span><span>বাংলা</span><span class="check">✓</span></button>
+  <button class="theme-option" data-language-choice="en"><span>🇬🇧</span><span>English</span><span class="check">✓</span></button>
  </div>
 </section>
 <section id="historyPage" class="page">
- <div class="settings-head">
-  <button class="icon-btn" id="historyBack" aria-label="Back">←</button>
-  <h2 id="historyTitle">ইতিহাস</h2>
- </div>
+ <div class="settings-head"><button class="icon-btn" id="historyBack" aria-label="Back"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><h2 id="historyTitle">History</h2></div>
  <div class="history-tabs">
   <button class="history-tab active" data-history-tab="daily" id="tabDaily">Daily</button>
   <button class="history-tab" data-history-tab="sessions" id="tabSessions">Sessions</button>
@@ -132,3 +111,93 @@ main{width:min(100%,430px);text-align:center;position:relative}
  <div class="history-actions"><button class="secondary-btn" id="exportHistory">Export</button><button class="secondary-btn danger" id="clearHistory">Clear History</button></div>
 </section>
 </main>
+<script>
+const $=id=>document.getElementById(id);
+const translations={
+bn:{target:'টার্গেট:',remaining:'বাকি:',custom:'＋ কাস্টম টার্গেট',placeholder:'নিজের টার্গেট লিখুন',apply:'প্রয়োগ',undo:'↶ Undo',minus:'− ১',reset:'↻ Reset',hint:'কাউন্টার স্বয়ংক্রিয়ভাবে সংরক্ষিত হবে',confirm:'গণনা শূন্য করবেন?',invalid:'১ থেকে ১,০০,০০,০০০-এর মধ্যে একটি সঠিক সংখ্যা লিখুন।',tap:'+১',settings:'সেটিংস',theme:'থিম',language:'ভাষা',back:'ফিরে যান',history:'ইতিহাস',daily:'দৈনিক',sessions:'সেশন',taps:'ট্যাপ',total:'মোট গণনা',records:'টি রেকর্ড',empty:'এখনো কোনো History নেই।',clear:'সব History মুছে ফেলবেন?',export:'ডাউনলোড',clearBtn:'History মুছুন',completed:'টার্গেট পূরণ',count:'গণনা',date:'তারিখ',time:'সময়',noSessions:'এখনো কোনো সেশন সম্পন্ন হয়নি।',noTaps:'এখনো কোনো Tap History নেই।'},
+en:{target:'Target:',remaining:'Remaining:',custom:'＋ Custom Target',placeholder:'Enter your target',apply:'Apply',undo:'↶ Undo',minus:'− 1',reset:'↻ Reset',hint:'Counter is saved automatically',confirm:'Reset the count to zero?',invalid:'Enter a valid number between 1 and 10,000,000.',tap:'+1',settings:'Settings',theme:'Theme',language:'Language',back:'Back',history:'History',daily:'Daily',sessions:'Sessions',taps:'Taps',total:'Total count',records:'records',empty:'No history yet.',clear:'Delete all history?',export:'Export',clearBtn:'Clear History',completed:'Target completed',count:'Count',date:'Date',time:'Time',noSessions:'No completed sessions yet.',noTaps:'No tap history yet.'}
+};
+const themes=['Night','Ember','Slate','Moss','Ocean'], circumference=2*Math.PI*100;
+let count=readNum('tasbih-count',0),goal=readNum('tasbih-goal',33)||33;
+let theme=localStorage.getItem('tasbih-theme')||'Night',language=localStorage.getItem('tasbih-language')||'bn';
+let undoStack=[],tapHistory=readJSON('tasbih-tap-history',[]),sessions=readJSON('tasbih-sessions',[]),activeTab='daily';
+function readNum(k,d){let n=Number(localStorage.getItem(k));return Number.isFinite(n)&&n>=0?n:d}
+function readJSON(k,d){try{let x=JSON.parse(localStorage.getItem(k));return Array.isArray(x)?x:d}catch(e){return d}}
+function t(){return translations[language]||translations.bn}
+function fmt(n){return Math.floor(n).toLocaleString(language==='bn'?'bn-BD':'en-US')}
+function dateKey(ts){let d=new Date(ts);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function dateText(ts){return new Date(ts).toLocaleDateString(language==='bn'?'bn-BD':'en-US',{year:'numeric',month:'short',day:'numeric'})}
+function timeText(ts){return new Date(ts).toLocaleTimeString(language==='bn'?'bn-BD':'en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}
+function save(){localStorage.setItem('tasbih-count',String(count));localStorage.setItem('tasbih-goal',String(goal));localStorage.setItem('tasbih-theme',theme);localStorage.setItem('tasbih-language',language);localStorage.setItem('tasbih-tap-history',JSON.stringify(tapHistory));localStorage.setItem('tasbih-sessions',JSON.stringify(sessions))}
+function render(){
+ $('count').textContent=fmt(count);$('goalText').textContent=fmt(goal);$('remaining').textContent=fmt(Math.max(0,goal-count));
+ let p=Math.min(1,count/goal);$('ringProgress').style.strokeDasharray=String(circumference);$('ringProgress').style.strokeDashoffset=String(circumference*(1-p));
+ document.querySelectorAll('.target').forEach(b=>{b.textContent=fmt(Number(b.dataset.goal));b.classList.toggle('active',Number(b.dataset.goal)===goal)});
+ document.querySelectorAll('[data-theme-choice]').forEach(b=>b.classList.toggle('selected',b.dataset.themeChoice===theme));
+ document.querySelectorAll('[data-language-choice]').forEach(b=>b.classList.toggle('selected',b.dataset.languageChoice===language));
+ save();
+}
+function applyTheme(v){theme=themes.includes(v)?v:'Night';document.body.dataset.theme=theme;$('theme-color-meta').content=theme==='Night'?'#000000':'#101722';render()}
+function updateLanguage(){
+ let x=t();document.documentElement.lang=language;
+ $('targetLabel').textContent=x.target;$('remainingLabel').textContent=x.remaining;$('customToggle').textContent=x.custom;$('customInput').placeholder=x.placeholder;$('customApply').textContent=x.apply;$('undo').textContent=x.undo;$('minus').textContent=x.minus;$('reset').textContent=x.reset;$('hint').textContent=x.hint;$('tapSub').textContent=x.tap;
+ $('settingsTitle').textContent=x.settings;$('themeHeading').textContent=x.theme;$('languageHeading').textContent=x.language;$('historyTitle').textContent=x.history;$('tabDaily').textContent=x.daily;$('tabSessions').textContent=x.sessions;$('tabTaps').textContent=x.taps;$('exportHistory').textContent=x.export;$('clearHistory').textContent=x.clearBtn;
+ render();if($('historyPage').classList.contains('active'))renderHistory();
+}
+function showPage(id){['homePage','settingsPage','historyPage'].forEach(p=>$(p).classList.toggle('active',p===id));if(id==='historyPage')renderHistory()}
+function vibrate(){if(navigator.vibrate)navigator.vibrate(22)}
+function addTap(){
+ let now=Date.now(),before=count;undoStack.push(before);count++;
+ tapHistory.unshift({ts:now,count:count,goal:goal});
+ if(tapHistory.length>5000)tapHistory.length=5000;
+ if(before<goal&&count>=goal){sessions.unshift({ts:now,goal:goal,count:count});if(sessions.length>1000)sessions.length=1000}
+ render();vibrate();
+}
+$('tap').addEventListener('click',addTap);
+$('undo').addEventListener('click',()=>{if(!undoStack.length)return;let old=undoStack.pop();count=old;tapHistory.shift();render()});
+$('minus').addEventListener('click',()=>{count=Math.max(0,count-1);render()});
+$('reset').addEventListener('click',()=>{if(confirm(t().confirm)){count=0;undoStack=[];render()}});
+document.querySelectorAll('.target').forEach(b=>b.addEventListener('click',()=>{goal=Number(b.dataset.goal);render()}));
+$('customToggle').addEventListener('click',()=>{$('customRow').classList.toggle('show');if($('customRow').classList.contains('show'))$('customInput').focus()});
+$('customApply').addEventListener('click',()=>{let n=Number($('customInput').value);if(!Number.isSafeInteger(n)||n<1||n>10000000){alert(t().invalid);return}goal=n;render();$('customRow').classList.remove('show')});
+$('customInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('customApply').click()});
+$('settingsBtn').addEventListener('click',()=>showPage('settingsPage'));
+$('settingsBack').addEventListener('click',()=>showPage('homePage'));
+$('historyBtn').addEventListener('click',()=>showPage('historyPage'));
+$('historyBack').addEventListener('click',()=>showPage('homePage'));
+document.querySelectorAll('[data-theme-choice]').forEach(b=>b.addEventListener('click',()=>applyTheme(b.dataset.themeChoice)));
+document.querySelectorAll('[data-language-choice]').forEach(b=>b.addEventListener('click',()=>{language=b.dataset.languageChoice;updateLanguage()}));
+document.querySelectorAll('[data-history-tab]').forEach(b=>b.addEventListener('click',()=>{activeTab=b.dataset.historyTab;document.querySelectorAll('[data-history-tab]').forEach(x=>x.classList.toggle('active',x===b));renderHistory()}));
+function card(title,sub){return '<div class="history-card"><strong>'+title+'</strong><div class="history-meta">'+sub+'</div></div>'}
+function renderHistory(){
+ let x=t(),list=$('historyList'),summary=$('historySummary');list.innerHTML='';summary.innerHTML='';
+ if(activeTab==='daily'){
+  let days={};tapHistory.forEach(r=>{let k=dateKey(r.ts);days[k]=(days[k]||0)+1});
+  let keys=Object.keys(days).sort().reverse();
+  let total=tapHistory.length;
+  summary.innerHTML=card(x.total+': '+fmt(total),fmt(keys.length)+' '+x.records);
+  if(!keys.length){list.innerHTML='<div class="history-empty">'+x.empty+'</div>';return}
+  keys.forEach(k=>{let d=new Date(k+'T00:00:00').getTime();list.innerHTML+=card(dateText(d)+' — '+fmt(days[k]),x.count+': '+fmt(days[k]))});
+ }else if(activeTab==='sessions'){
+  summary.innerHTML=card(x.sessions+': '+fmt(sessions.length),x.completed);
+  if(!sessions.length){list.innerHTML='<div class="history-empty">'+x.noSessions+'</div>';return}
+  sessions.forEach(r=>{list.innerHTML+=card(x.completed+' — '+fmt(r.goal),dateText(r.ts)+' · '+timeText(r.ts)+' · '+x.count+': '+fmt(r.count))});
+ }else{
+  summary.innerHTML=card(x.taps+': '+fmt(tapHistory.length),x.records);
+  if(!tapHistory.length){list.innerHTML='<div class="history-empty">'+x.noTaps+'</div>';return}
+  tapHistory.slice(0,300).forEach(r=>{list.innerHTML+=card(x.count+': '+fmt(r.count),dateText(r.ts)+' · '+timeText(r.ts)+' · '+x.target+' '+fmt(r.goal))});
+  if(tapHistory.length>300)list.innerHTML+='<div class="history-empty">Showing latest 300 taps</div>';
+ }
+}
+$('clearHistory').addEventListener('click',()=>{if(confirm(t().clear)){tapHistory=[];sessions=[];save();renderHistory()}});
+$('exportHistory').addEventListener('click',()=>{
+ let data={exportedAt:new Date().toISOString(),tapHistory:tapHistory,sessions:sessions};
+ let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download='tasbih-history.json';a.click();URL.revokeObjectURL(url);
+});
+if(!themes.includes(theme))theme='Night';if(!['bn','en'].includes(language))language='bn';
+applyTheme(theme);updateLanguage();
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(r=>r.update()).catch(()=>{}))}
+</script>
+</body>
+</html>
