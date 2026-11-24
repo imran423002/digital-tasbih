@@ -1,4 +1,4 @@
-const CACHE_NAME = "tasbih-v3";
+const CACHE_NAME = "tasbih-v4";
 
 const FILES = [
   "./",
