@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#000000"><meta name="description" content="Simple digital tasbih counter">
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png">
+<title>Digital Tasbih</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#000;color:#fff;font-family:system-ui,"Noto Sans Bengali",sans-serif;min-height:100dvh;display:flex;justify-content:center;align-items:center;padding:20px}
+main{width:min(100%,430px);text-align:center}.sub{color:#aaa;font-size:14px;letter-spacing:2px}.count{font-size:clamp(64px,20vw,100px);font-weight:650;font-variant-numeric:tabular-nums;margin:18px 0 28px}
+.tap{width:min(68vw,260px);height:min(68vw,260px);border-radius:50%;border:8px solid #343434;background:radial-gradient(circle at 35% 30%,#292929,#101010 65%);color:#e5c77b;font-size:30px;font-weight:700;box-shadow:0 0 35px #ffffff12;touch-action:manipulation}
+.tap:active{transform:scale(.97);background:#242018}.actions{display:flex;gap:10px;justify-content:center;margin:25px 0 18px;flex-wrap:wrap}button.small,.target{background:#171717;color:#eee;border:1px solid #444;border-radius:14px;padding:12px 18px;font-size:15px}
+.targets{display:flex;gap:8px;justify-content:center;margin-top:12px}.target.active{border-color:#d8bd78;color:#e5c77b}.progress{height:5px;background:#222;border-radius:8px;margin:18px 12px;overflow:hidden}.bar{height:100%;width:0;background:#d8bd78;transition:width .15s}.hint{color:#888;font-size:12px;margin-top:24px}
+</style></head>
+<body><main>
+<div class="sub">DIGITAL TASBIH</div><div class="count" id="count">0</div>
+<button class="tap" id="tap" aria-label="Count">TAP<br><span style="font-size:15px">+১</span></button>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div class="sub" id="status">টার্গেট: ৩৩</div>
+<div class="targets"><button class="target active" data-goal="33">৩৩</button><button class="target" data-goal="99">৯৯</button><button class="target" data-goal="100">১০০</button></div>
+<div class="actions"><button class="small" id="undo">↶ Undo</button><button class="small" id="minus">− ১</button><button class="small" id="reset">Reset</button></div>
+<div class="hint">কাউন্টার স্বয়ংক্রিয়ভাবে সংরক্ষিত হবে</div>
+</main>
+<script>
+const $=id=>document.getElementById(id);let count=Number(localStorage.getItem('tasbih-count')||0),goal=Number(localStorage.getItem('tasbih-goal')||33),history=[];
+function bn(n){return n.toLocaleString('bn-BD')}
+function render(){ $('count').textContent=bn(count);$('status').textContent=count>=goal?'আলহামদুলিল্লাহ! টার্গেট পূর্ণ হয়েছে':'টার্গেট: '+bn(goal);$('bar').style.width=Math.min(100,count/goal*100)+'%';document.querySelectorAll('.target').forEach(b=>b.classList.toggle('active',Number(b.dataset.goal)===goal));localStorage.setItem('tasbih-count',count);localStorage.setItem('tasbih-goal',goal)}
+function vibrate(){if(navigator.vibrate)navigator.vibrate(25)}
+$('tap').onclick=()=>{history.push(count);count++;render();vibrate()};
+$('undo').onclick=()=>{if(history.length)count=history.pop();else count=Math.max(0,count-1);render()};
+$('minus').onclick=()=>{count=Math.max(0,count-1);render()};
+$('reset').onclick=()=>{if(confirm('গণনা শূন্য করবেন?')){history=[];count=0;render()}};
+document.querySelectorAll('.target').forEach(b=>b.onclick=()=>{goal=Number(b.dataset.goal);render()});
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'));
+render();
+</script></body></html>
